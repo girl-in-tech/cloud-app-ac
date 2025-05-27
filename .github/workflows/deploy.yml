@@ -35,6 +35,7 @@ jobs:
 
       # Step 5: Set up kubectl
       - name: Set up kubectl
+        shell: bash
         run: |
           echo "Setting up kubectl..."
           echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > "$HOME/k3s.yaml"
@@ -54,6 +55,7 @@ jobs:
           kubectl cluster-info || echo "Failed to get cluster info"
 
       - name: Debug K3s network connectivity
+        shell: bash
         run: |
           echo "Pinging K3s server..."
           ping -c 4 172.29.14.201 || echo "Ping failed"
@@ -62,6 +64,7 @@ jobs:
           curl --insecure --connect-timeout 5 https://172.29.14.201:6443 || echo "Curl failed"
 
       - name: Test kubectl access
+        shell: bash
         run: |
           export KUBECONFIG="$HOME/k3s.yaml"
           echo "Testing kubectl get pods..."
@@ -70,6 +73,7 @@ jobs:
 
       # Step 6: Update Deployment with the new image tag
       - name: Update Deployment with new image tag
+        shell: bash
         run: |
           echo "Updating deployment..."
           export KUBECONFIG="$HOME/k3s.yaml"
@@ -80,6 +84,7 @@ jobs:
 
       # Step 7: Deploy to Kubernetes
       - name: Deploy to Kubernetes
+        shell: bash
         run: |
           echo "Applying Kubernetes deployment..."
           export KUBECONFIG="$HOME/k3s.yaml"
