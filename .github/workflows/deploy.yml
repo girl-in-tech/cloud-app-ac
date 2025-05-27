@@ -35,61 +35,70 @@ jobs:
 
       # Step 5: Set up kubectl
       - name: Set up kubectl
-        shell: bash
+        shell: pwsh
         run: |
-          echo "Setting up kubectl..."
-          echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > "$HOME/k3s.yaml"
-          export KUBECONFIG="$HOME/k3s.yaml"
-          
-          # Debugging: Verify the KUBECONFIG and list available contexts
-          echo "Kubeconfig file: $HOME/k3s.yaml"
-          kubectl config get-contexts || echo "Failed to list contexts"
+          Write-Host "Setting up kubectl..."
 
-          # Debugging: Try switching to the default context
-          kubectl config use-context default || echo "Context 'default' not found"
-          
-          # Debugging: Show the current context
-          kubectl config current-context || echo "Failed to get current context"
-          
-          # Debugging: Get cluster info to verify connection
-          kubectl cluster-info || echo "Failed to get cluster info"
+          $decoded = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ secrets.KUBECONFIG_B64 }}"))
+          $kubeconfigPath = "$env:USERPROFILE\k3s.yaml"
+          $decoded | Out-File -FilePath $kubeconfigPath -Encoding ascii
+          $env:KUBECONFIG = $kubeconfigPath
 
+          Write-Host "Kubeconfig file: $kubeconfigPath"
+          kubectl config get-contexts
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to list contexts" }
+
+          kubectl config use-context default
+          if ($LASTEXITCODE -ne 0) { Write-Host "Context 'default' not found" }
+
+          kubectl config current-context
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get current context" }
+
+          kubectl cluster-info
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get cluster info" }
+
+      # Step 5.1: Debug K3s network connectivity
       - name: Debug K3s network connectivity
-        shell: bash
+        shell: pwsh
         run: |
-          echo "Pinging K3s server..."
-          ping -c 4 172.29.14.201 || echo "Ping failed"
-          
-          echo "Trying curl to K3s server..."
-          curl --insecure --connect-timeout 5 https://172.29.14.201:6443 || echo "Curl failed"
+          Write-Host "Pinging K3s server..."
+          ping 172.29.14.201 -n 4
+          if ($LASTEXITCODE -ne 0) { Write-Host "Ping failed" }
 
+          Write-Host "Trying curl to K3s server..."
+          curl.exe --insecure --connect-timeout 5 https://172.29.14.201:6443
+          if ($LASTEXITCODE -ne 0) { Write-Host "Curl failed" }
+
+      # Step 5.2: Test kubectl access
       - name: Test kubectl access
-        shell: bash
+        shell: pwsh
         run: |
-          export KUBECONFIG="$HOME/k3s.yaml"
-          echo "Testing kubectl get pods..."
-          kubectl get pods --all-namespaces || echo "kubectl failed"
-
+          $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
+          Write-Host "Testing kubectl get pods..."
+          kubectl get pods --all-namespaces
+          if ($LASTEXITCODE -ne 0) { Write-Host "kubectl failed" }
 
       # Step 6: Update Deployment with the new image tag
       - name: Update Deployment with new image tag
-        shell: bash
+        shell: pwsh
         run: |
-          echo "Updating deployment..."
-          export KUBECONFIG="$HOME/k3s.yaml"
-          kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record || echo "Failed to set image for deployment"
-          
-          # Debugging: Verify the updated deployment status
-          kubectl rollout status deployment/cloud-app || echo "Failed to get deployment status"
+          $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
+          Write-Host "Updating deployment..."
+          kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to set image for deployment" }
+          kubectl rollout status deployment/cloud-app
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get deployment status" }
 
       # Step 7: Deploy to Kubernetes
       - name: Deploy to Kubernetes
-        shell: bash
+        shell: pwsh
         run: |
-          echo "Applying Kubernetes deployment..."
-          export KUBECONFIG="$HOME/k3s.yaml"
-          # kubectl apply -f docker/deploy.yml || echo "Failed to apply Kubernetes deployment"
-          
-          # Debugging: Verify the applied resources
-          kubectl get deployments || echo "Failed to get deployments"
-          kubectl get pods || echo "Failed to get pods"
+          $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
+          Write-Host "Applying Kubernetes deployment..."
+          # Uncomment the line below if you want to apply the full deployment YAML
+          # kubectl apply -f docker/deploy.yml
+          # if ($LASTEXITCODE -ne 0) { Write-Host "Failed to apply Kubernetes deployment" }
+          kubectl get deployments
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get deployments" }
+          kubectl get pods
+          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get pods" }
