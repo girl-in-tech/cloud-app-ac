@@ -1,0 +1,90 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step 3: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Step 4: Build and push Docker image
+      - name: Build and push Docker image
+        id: build-image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: magdalebam/cloud-app:${{ github.sha }}  # Using commit SHA as the tag
+
+      # Step 5: Set up kubectl
+      - name: Set up kubectl
+        run: |
+          echo "Setting up kubectl..."
+          echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > "$HOME/k3s.yaml"
+          export KUBECONFIG="$HOME/k3s.yaml"
+          
+          # Debugging: Verify the KUBECONFIG and list available contexts
+          echo "Kubeconfig file: $HOME/k3s.yaml"
+          kubectl config get-contexts || echo "Failed to list contexts"
+
+          # Debugging: Try switching to the default context
+          kubectl config use-context default || echo "Context 'default' not found"
+          
+          # Debugging: Show the current context
+          kubectl config current-context || echo "Failed to get current context"
+          
+          # Debugging: Get cluster info to verify connection
+          kubectl cluster-info || echo "Failed to get cluster info"
+
+      - name: Debug K3s network connectivity
+        run: |
+          echo "Pinging K3s server..."
+          ping -c 4 172.29.14.201 || echo "Ping failed"
+          
+          echo "Trying curl to K3s server..."
+          curl --insecure --connect-timeout 5 https://172.29.14.201:6443 || echo "Curl failed"
+
+      - name: Test kubectl access
+        run: |
+          export KUBECONFIG="$HOME/k3s.yaml"
+          echo "Testing kubectl get pods..."
+          kubectl get pods --all-namespaces || echo "kubectl failed"
+
+
+      # Step 6: Update Deployment with the new image tag
+      - name: Update Deployment with new image tag
+        run: |
+          echo "Updating deployment..."
+          export KUBECONFIG="$HOME/k3s.yaml"
+          kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record || echo "Failed to set image for deployment"
+          
+          # Debugging: Verify the updated deployment status
+          kubectl rollout status deployment/cloud-app || echo "Failed to get deployment status"
+
+      # Step 7: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
+        run: |
+          echo "Applying Kubernetes deployment..."
+          export KUBECONFIG="$HOME/k3s.yaml"
+          # kubectl apply -f docker/deploy.yml || echo "Failed to apply Kubernetes deployment"
+          
+          # Debugging: Verify the applied resources
+          kubectl get deployments || echo "Failed to get deployments"
+          kubectl get pods || echo "Failed to get pods"
