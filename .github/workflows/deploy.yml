@@ -49,10 +49,10 @@ jobs:
           
           # Debugging steps
           Write-Host "Kubeconfig file saved to $kubeconfigPath"
-          kubectl config get-contexts
-          kubectl config use-context default
-          kubectl config current-context
-          kubectl cluster-info
+          #kubectl config get-contexts
+          #kubectl config use-context default
+          #kubectl config current-context
+          #kubectl cluster-info
 
       # Step 6: Debug K3s network connectivity
       - name: Debug K3s network connectivity
