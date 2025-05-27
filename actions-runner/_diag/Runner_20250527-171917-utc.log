@@ -152,3 +152,119 @@
 [2025-05-27 17:21:53Z INFO CredentialManager] Creating type OAuth
 [2025-05-27 17:21:53Z INFO CredentialManager] Creating credential type: OAuth
 [2025-05-27 17:21:53Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:22:43Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:22:43Z INFO ConfigurationStore] stored True
+[2025-05-27 17:22:43Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:22:43Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:22:43Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:22:43Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:23:00Z INFO MessageListener] Message '3922195760855279868' received from session '9bf5ba48-7062-4754-b742-9b5ef67afa28'.
+[2025-05-27 17:23:00Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:23:00Z INFO ConfigurationStore] stored True
+[2025-05-27 17:23:00Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:23:00Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:23:00Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:23:00Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:23:00Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:23:00Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:23:01Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2025-05-27 17:23:02Z INFO JobDispatcher] Job request 0 for plan 7892802e-660d-406f-b44a-4fc5405ebd2b job af4896dd-197f-5422-830f-dfa97fea0c85 received.
+[2025-05-27 17:23:03Z INFO MessageListener] Received job status event. JobState: Busy
+[2025-05-27 17:23:03Z INFO MessageListener] _getMessagesTokenSource is already disposed.
+[2025-05-27 17:23:03Z INFO Terminal] WRITE LINE: 2025-05-27 17:23:03Z: Running job: deploy
+[2025-05-27 17:23:03Z INFO JobDispatcher] Start renew job request 0 for job af4896dd-197f-5422-830f-dfa97fea0c85.
+[2025-05-27 17:23:03Z INFO JobDispatcher] Successfully renew job af4896dd-197f-5422-830f-dfa97fea0c85, job is valid till 5/27/2025 5:33:03 PM
+[2025-05-27 17:23:03Z INFO HostContext] Well known directory 'Bin': 'C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\bin'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper] Starting process:
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   File name: 'C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\bin\Runner.Worker.exe'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Arguments: 'spawnclient 1592 752'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Working directory: 'C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\bin'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'True'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper]   High priority process: 'True'
+[2025-05-27 17:23:03Z INFO ProcessInvokerWrapper] Process started with process id 8028, waiting for process exit.
+[2025-05-27 17:23:03Z INFO JobDispatcher] Send job request message to worker for job af4896dd-197f-5422-830f-dfa97fea0c85.
+[2025-05-27 17:23:03Z INFO ProcessChannel] Sending message of length 27948, with hash '85061c602af65295c6ee33b8dd3f2f6830d6c223b555c94f143b17a3f203a4b9'
+[2025-05-27 17:23:03Z INFO JobNotification] Entering JobStarted Notification
+[2025-05-27 17:23:03Z INFO JobNotification] Entering StartMonitor
+[2025-05-27 17:23:04Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:23:04Z INFO ConfigurationStore] stored True
+[2025-05-27 17:23:04Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:23:04Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:23:04Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:23:04Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:23:54Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:23:54Z INFO ConfigurationStore] stored True
+[2025-05-27 17:23:54Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:23:54Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:23:54Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:23:54Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:24:03Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-05-27 17:24:03Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-05-27 17:24:03Z INFO ProcessInvokerWrapper] Finished process 8028 with exit code 102, and elapsed time 00:00:59.9858543.
+[2025-05-27 17:24:03Z INFO JobDispatcher] Worker finished for job af4896dd-197f-5422-830f-dfa97fea0c85. Code: 102
+[2025-05-27 17:24:03Z INFO JobDispatcher] finish job request for job af4896dd-197f-5422-830f-dfa97fea0c85 with result: Failed
+[2025-05-27 17:24:03Z INFO Terminal] WRITE LINE: 2025-05-27 17:24:03Z: Job deploy completed with result: Failed
+[2025-05-27 17:24:03Z INFO JobDispatcher] Stop renew job request for job af4896dd-197f-5422-830f-dfa97fea0c85.
+[2025-05-27 17:24:03Z INFO JobDispatcher] job renew has been cancelled, stop renew job af4896dd-197f-5422-830f-dfa97fea0c85.
+[2025-05-27 17:24:03Z INFO JobNotification] Entering JobCompleted Notification
+[2025-05-27 17:24:03Z INFO JobNotification] Entering EndMonitor
+[2025-05-27 17:24:03Z INFO MessageListener] Received job status event. JobState: Online
+[2025-05-27 17:24:45Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:24:45Z INFO ConfigurationStore] stored True
+[2025-05-27 17:24:45Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:24:45Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:24:45Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:24:45Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:25:35Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:25:35Z INFO ConfigurationStore] stored True
+[2025-05-27 17:25:35Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:25:35Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:25:35Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:25:35Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:26:26Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:26:26Z INFO ConfigurationStore] stored True
+[2025-05-27 17:26:26Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:26:26Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:26:26Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:26:26Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:27:16Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:27:16Z INFO ConfigurationStore] stored True
+[2025-05-27 17:27:16Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:27:16Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:27:16Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:27:16Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:28:07Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:28:07Z INFO ConfigurationStore] stored True
+[2025-05-27 17:28:07Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:28:07Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:28:07Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:28:07Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:28:57Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:28:57Z INFO ConfigurationStore] stored True
+[2025-05-27 17:28:57Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:28:57Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:28:57Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:28:57Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:29:47Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:29:47Z INFO ConfigurationStore] stored True
+[2025-05-27 17:29:47Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:29:47Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:29:47Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:29:47Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:30:38Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:30:38Z INFO ConfigurationStore] stored True
+[2025-05-27 17:30:38Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:30:38Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:30:38Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:30:38Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
+[2025-05-27 17:31:28Z INFO ConfigurationStore] HasCredentials()
+[2025-05-27 17:31:28Z INFO ConfigurationStore] stored True
+[2025-05-27 17:31:28Z INFO CredentialManager] GetCredentialProvider
+[2025-05-27 17:31:28Z INFO CredentialManager] Creating type OAuth
+[2025-05-27 17:31:28Z INFO CredentialManager] Creating credential type: OAuth
+[2025-05-27 17:31:28Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\actions-runner\.credentials_rsaparams
