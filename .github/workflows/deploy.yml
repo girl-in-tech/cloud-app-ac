@@ -74,6 +74,7 @@ jobs:
       - name: Update Deployment with new image tag
         shell: powershell
         run: |
+          Test-Path "C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yaml"
           Write-Host "Updating deployment..."
           $env:KUBECONFIG = "C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yaml"
           kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record
