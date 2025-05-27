@@ -69,13 +69,6 @@ jobs:
             Write-Host "Curl failed"
           }
 
-      # Step 7: Test kubectl access
-      - name: Test kubectl access
-        shell: powershell
-        run: |
-          $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
-          Write-Host "Testing kubectl get pods..."
-          kubectl get pods --all-namespaces
 
       # Step 8: Update Deployment with the new image tag
       - name: Update Deployment with new image tag
