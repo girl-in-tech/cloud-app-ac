@@ -41,7 +41,7 @@ jobs:
 
           # Decode base64 kubeconfig and save to file
           $kubeconfigDecoded = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${{ secrets.KUBECONFIG_B64 }}'))
-          $kubeconfigPath="C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yml"
+          $kubeconfigPath="C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yaml"
           $kubeconfigDecoded | Out-File -FilePath $kubeconfigPath -Encoding ascii
 
           # Set KUBECONFIG env variable for subsequent commands
@@ -75,7 +75,7 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Updating deployment..."
-          $env:KUBECONFIG = "C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yml"
+          $env:KUBECONFIG = "C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yaml"
           kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record
 
           Write-Host "Verifying deployment rollout status..."
@@ -86,7 +86,7 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Applying Kubernetes deployment..."
-          $env:KUBECONFIG = "C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yml"
+          $env:KUBECONFIG = "C:\Users\Magdalena\Desktop\Desktop\master\AC\Project\cloud-app\k3s.yaml"
           # Uncomment the next line if you want to apply the deployment YAML file
           # kubectl apply -f docker/deploy.yml
 
