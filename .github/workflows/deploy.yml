@@ -35,70 +35,70 @@ jobs:
 
       # Step 5: Set up kubectl
       - name: Set up kubectl
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Setting up kubectl..."
 
-          $decoded = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${{ secrets.KUBECONFIG_B64 }}"))
+          # Decode base64 kubeconfig and save to file
+          $kubeconfigDecoded = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${{ secrets.KUBECONFIG_B64 }}'))
           $kubeconfigPath = "$env:USERPROFILE\k3s.yaml"
-          $decoded | Out-File -FilePath $kubeconfigPath -Encoding ascii
+          $kubeconfigDecoded | Out-File -FilePath $kubeconfigPath -Encoding ascii
+
+          # Set KUBECONFIG env variable for subsequent commands
           $env:KUBECONFIG = $kubeconfigPath
-
-          Write-Host "Kubeconfig file: $kubeconfigPath"
+          
+          # Debugging steps
+          Write-Host "Kubeconfig file saved to $kubeconfigPath"
           kubectl config get-contexts
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to list contexts" }
-
           kubectl config use-context default
-          if ($LASTEXITCODE -ne 0) { Write-Host "Context 'default' not found" }
-
           kubectl config current-context
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get current context" }
-
           kubectl cluster-info
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get cluster info" }
 
-      # Step 5.1: Debug K3s network connectivity
+      # Step 6: Debug K3s network connectivity
       - name: Debug K3s network connectivity
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Pinging K3s server..."
-          ping 172.29.14.201 -n 4
-          if ($LASTEXITCODE -ne 0) { Write-Host "Ping failed" }
+          ping -n 4 172.29.14.201
 
           Write-Host "Trying curl to K3s server..."
-          curl.exe --insecure --connect-timeout 5 https://172.29.14.201:6443
-          if ($LASTEXITCODE -ne 0) { Write-Host "Curl failed" }
+          try {
+            curl --insecure --connect-timeout 5 https://172.29.14.201:6443
+          }
+          catch {
+            Write-Host "Curl failed"
+          }
 
-      # Step 5.2: Test kubectl access
+      # Step 7: Test kubectl access
       - name: Test kubectl access
-        shell: pwsh
+        shell: powershell
         run: |
           $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
           Write-Host "Testing kubectl get pods..."
           kubectl get pods --all-namespaces
-          if ($LASTEXITCODE -ne 0) { Write-Host "kubectl failed" }
 
-      # Step 6: Update Deployment with the new image tag
+      # Step 8: Update Deployment with the new image tag
       - name: Update Deployment with new image tag
-        shell: pwsh
+        shell: powershell
         run: |
-          $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
           Write-Host "Updating deployment..."
-          kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to set image for deployment" }
-          kubectl rollout status deployment/cloud-app
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get deployment status" }
-
-      # Step 7: Deploy to Kubernetes
-      - name: Deploy to Kubernetes
-        shell: pwsh
-        run: |
           $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
+          kubectl set image deployment/cloud-app cloud-app=magdalebam/cloud-app:${{ github.sha }} --record
+
+          Write-Host "Verifying deployment rollout status..."
+          kubectl rollout status deployment/cloud-app
+
+      # Step 9: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
+        shell: powershell
+        run: |
           Write-Host "Applying Kubernetes deployment..."
-          # Uncomment the line below if you want to apply the full deployment YAML
+          $env:KUBECONFIG = "$env:USERPROFILE\k3s.yaml"
+          # Uncomment the next line if you want to apply the deployment YAML file
           # kubectl apply -f docker/deploy.yml
-          # if ($LASTEXITCODE -ne 0) { Write-Host "Failed to apply Kubernetes deployment" }
+
+          Write-Host "Getting deployments..."
           kubectl get deployments
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get deployments" }
+
+          Write-Host "Getting pods..."
           kubectl get pods
-          if ($LASTEXITCODE -ne 0) { Write-Host "Failed to get pods" }
