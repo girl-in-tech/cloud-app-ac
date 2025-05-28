@@ -8,6 +8,6 @@ class MainController {
 
     @GetMapping("/")
     fun main(): String {
-        return "Hello World test success deploy"
+        return "aZI AM SUSTINUT"
     }
 }
