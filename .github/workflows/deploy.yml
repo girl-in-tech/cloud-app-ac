@@ -96,3 +96,6 @@ jobs:
 
           Write-Host "Getting pods..."
           kubectl get pods
+
+
+
