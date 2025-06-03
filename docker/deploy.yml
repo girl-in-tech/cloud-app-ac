@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: cloud-app
 spec:
-  replicas: 2 # scale the application
+  replicas: 3 # scale the application
   strategy:
     type: RollingUpdate # zero downtime
     rollingUpdate:
