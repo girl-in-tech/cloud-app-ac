@@ -59,11 +59,11 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Pinging K3s server..."
-          ping -n 4 172.29.14.201
+          ping -n 4 192.168.84.55
 
           Write-Host "Trying curl to K3s server..."
           try {
-            curl --insecure --connect-timeout 5 https://172.29.14.201:6443
+            curl --insecure --connect-timeout 5 https://192.168.84.55:6443
           }
           catch {
             Write-Host "Curl failed"
